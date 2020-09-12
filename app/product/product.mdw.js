@@ -11,7 +11,7 @@ async function getProductMiddleware(request, response, next) {
         let products;
         if (!_.isEmpty(request.query)) {
             const productController = new ProductController();
-            products = await productController.getCreditQuery(request.query);
+            products = await productController.getProductQuery(request.query);
         }
         response.locals.products = products;
         next();
@@ -20,22 +20,22 @@ async function getProductMiddleware(request, response, next) {
     }
 }
 
-function isPalindromoMiddleware(request, response, next){
+function isPalindromoMiddleware(request, response, next) {
     try {
         let value = request.query.value;
-        value = value.toLowerCase().replace(/\s/g,"");
+        value = value.toLowerCase().replace(/\s/g, "");
         let valueReverse = value.split("").reverse().toString();
-        for (var i = 0; i < ((valueReverse.length)-1); i++) {
-            valueReverse = valueReverse.replace(",","");
+        for (var i = 0; i < ((valueReverse.length) - 1); i++) {
+            valueReverse = valueReverse.replace(",", "");
         };
         response.locals.isPalindromo = (value === valueReverse);
         next();
-    } catch (error){
+    } catch (error) {
         return commonResponse.setResponseWithError(response, error);
     }
 }
 
-function applyDiscountMiddleware(request, response){
+function applyDiscountMiddleware(request, response) {
     try {
         let products = response.locals.products;
         const isPalindromo = response.locals.isPalindromo;
