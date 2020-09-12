@@ -4,7 +4,7 @@ const mongoose = require('./db'),
 const schemas = {
 
     productSchema: new Schema({
-        id: {type: String},
+        id: {type: Number},
         brand:{type: String},
         description: {type: String},
         image: {type: String},

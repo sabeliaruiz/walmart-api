@@ -8,7 +8,7 @@ class ProductController{
         let products;
         const value = query.value;
         if(this.isOnlyNumber(value)){
-            products = await Product.find({ id: value });
+            products = await Product.find({ id: parseInt(value) });
         }
         if(_.isUndefined(products)) {
             products = await Product.find(
